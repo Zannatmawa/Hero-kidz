@@ -7,11 +7,20 @@ export const getProducts = async () => {
     return products;
 }
 
-export const getSingleProducts = async () => {
-    if (IdleDeadline.length != 24) {
-        return {};
+export const getSingleProducts = async (id) => {
+    try {
+        if (!id || id.length !== 24) {
+            return null;
+        }
+
+        const query = { _id: new ObjectId(id) };
+
+        const product = await dbConnect(collections.PRODUCTS)
+            .findOne(query);
+
+        return product;
+    } catch (error) {
+        console.error("Error fetching product:", error);
+        return null;
     }
-    const query = { _id: new ObjectId(id) };
-    const product = await dbConnect(collections.PRODUCTS).findOne(query);
-    return product || {};
 }

@@ -3,8 +3,9 @@ import Link from "next/link";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 
 const ProductCard = ({ product }) => {
+    console.log(product._id)
     const {
-        id,
+        _id,
         title,
         image,
         price,
@@ -14,7 +15,6 @@ const ProductCard = ({ product }) => {
         sold,
     } = product;
 
-    console.log(id)
     const discountedPrice = Math.round(
         price - (price * discount) / 100
     );
@@ -73,7 +73,7 @@ const ProductCard = ({ product }) => {
                         <FaShoppingCart className="mr-2" />
                         Add to Cart
                     </button>
-                    <Link className="btn btn-primary btn-sm w-full" href={`/products/${id}`}>Details</Link>
+                    <Link className="btn btn-primary btn-sm w-full" href={`/products/${_id}`}>Details</Link>
                 </div>
             </div>
         </div>

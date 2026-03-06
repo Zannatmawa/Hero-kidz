@@ -7,7 +7,7 @@ import { FiShoppingCart } from 'react-icons/fi'
 const Navbar = () => {
     const nav = <>
         <Navlink href={"/"}>Home</Navlink>
-        <Navlink href={"/oroducts"}>Products</Navlink>
+        <Navlink href={"/products"}>Products</Navlink>
         <Navlink href={"/blog"}>Blog</Navlink>
         <Navlink href={"/contact"}>Contact</Navlink>
     </>

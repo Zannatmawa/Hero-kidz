@@ -1,12 +1,12 @@
-import { getProducts } from "@/actions/server/product";
+import { getSingleProducts } from "@/actions/server/product";
 import Image from "next/image";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 
 
 const ProductDetailsPage = async ({ params }) => {
-    const { id } = params;
-    // const product = await getProductById(id);
-    const products = await getProducts() || []
+    const { id } = await params;
+
+    const products = await getSingleProducts(id) || [];
 
     const {
         title,
@@ -16,6 +16,8 @@ const ProductDetailsPage = async ({ params }) => {
         ratings,
         reviews,
         sold,
+        info,
+        qna,
         description,
     } = products;
 
@@ -69,16 +71,70 @@ const ProductDetailsPage = async ({ params }) => {
                         Sold: {sold}
                     </p>
 
-                    {/* Description */}
-                    <p className="text-neutral leading-relaxed">
-                        {description}
-                    </p>
+
 
                     {/* Button */}
                     <button className="btn btn-primary w-full mt-4">
                         <FaShoppingCart className="mr-2" />
                         Add to Cart
                     </button>
+
+                </div>
+                <div className="col-span-full">
+
+                    {/* Description */}
+                    <p className="text-neutral leading-relaxed mb-6">
+                        {description}
+                    </p>
+
+                    {/* Reviews */}
+                    <div className="mb-6">
+                        <h2 className="text-xl font-semibold mb-2">Customer Reviews</h2>
+                        <p className="text-gray-600">
+                            Total Reviews: {reviews}
+                        </p>
+                    </div>
+                    {/* Key Features */}
+                    <div className="mb-6">
+                        <h2 className="text-xl font-semibold mb-3">Key Features</h2>
+
+                        {info?.length > 0 ? (
+                            <ul className="list-disc list-inside space-y-2 text-gray-700">
+                                {info.map((item, index) => (
+                                    <li key={index}>{item}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-gray-500">No features available</p>
+                        )}
+                    </div>
+
+                    {/* Q&A Section */}
+                    <div>
+                        <h2 className="text-xl font-semibold mb-4">Product Q&A</h2>
+
+                        {qna?.length > 0 ? (
+                            <div className="space-y-4">
+                                {qna.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-base-100 p-4 rounded-lg shadow"
+                                    >
+                                        <p className="font-semibold">
+                                            Q: {item.question}
+                                        </p>
+                                        <p className="text-gray-600 mt-1">
+                                            A: {item.answer}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-gray-500">
+                                No questions yet.
+                            </p>
+                        )}
+                    </div>
 
                 </div>
             </div>
