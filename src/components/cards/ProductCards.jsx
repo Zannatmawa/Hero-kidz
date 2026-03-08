@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
+import CardBtn from "../buttons/CardBtn";
 
 const ProductCard = ({ product }) => {
     console.log(product._id)
@@ -69,10 +70,7 @@ const ProductCard = ({ product }) => {
 
                 {/* Button */}
                 <div className="card-actions mt-3">
-                    <button className="btn btn-primary btn-sm w-full">
-                        <FaShoppingCart className="mr-2" />
-                        Add to Cart
-                    </button>
+                    <CardBtn product={product} />
                     <Link className="btn btn-primary btn-sm w-full" href={`/products/${_id}`}>Details</Link>
                 </div>
             </div>
